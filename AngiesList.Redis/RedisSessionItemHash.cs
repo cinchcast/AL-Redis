@@ -16,6 +16,7 @@ namespace AngiesList.Redis
 	{
 		private RedisConnection redis;
 		private string sessionId;
+        private string prefix;
 		private int timeoutMinutes;
 
 		private IValueSerializer serializer = new ClrBinarySerializer();
@@ -26,10 +27,11 @@ namespace AngiesList.Redis
 		private const string TYPE_PREFIX = "__CLR_TYPE__";
 		private const string VALUE_PREFIX = "val:";
 
-		public RedisSessionItemHash(string sessionId, int timeoutMinutes, RedisConnection redisConnection)
+		public RedisSessionItemHash(string sessionId, string appName, int timeoutMinutes, RedisConnection redisConnection)
 			: base()
 		{
 			this.sessionId = sessionId;
+            this.prefix = VALUE_PREFIX + appName + ":";
 			this.timeoutMinutes = timeoutMinutes;
 			this.redis = redisConnection;
 			SetTasks = new List<Task>();
@@ -57,7 +59,7 @@ namespace AngiesList.Redis
 				string dePrefixedName;
 				foreach (var name in GetRawItems().Keys) {
 					if (!name.StartsWith(TYPE_PREFIX)) {
-						dePrefixedName = name.Substring(VALUE_PREFIX.Length);
+						dePrefixedName = name.Substring(prefix.Length);
 						BaseAdd(dePrefixedName, null);
 					}
 				}
@@ -69,12 +71,12 @@ namespace AngiesList.Redis
 		{
 			AddKeysToBase();
 			lock (deserializeLock) {
-				if (!GetRawItems().ContainsKey(VALUE_PREFIX + name)) { return; }
+				if (!GetRawItems().ContainsKey(prefix + name)) { return; }
 
 				//var typeName = Encoding.ASCII.GetString(GetRawItems()[TYPE_PREFIX + name]);
 				//var fieldClrType = Type.GetType(typeName);
 
-				var bytes = GetRawItems()[VALUE_PREFIX + name];
+				var bytes = GetRawItems()[prefix + name];
 
 				var valueToAdd = serializer.Deserialize(bytes);
 				var persistentCopy = serializer.Deserialize(bytes);
@@ -114,24 +116,24 @@ namespace AngiesList.Redis
 			var bytes = serializer.Serialize(value);
 
 			byte[] storedBytes;
-			if (GetRawItems().TryGetValue(VALUE_PREFIX + name, out storedBytes) &&
+			if (GetRawItems().TryGetValue(prefix + name, out storedBytes) &&
 				bytes.SequenceEqual(storedBytes)) {
 					return;
 			}
 
 			var itemsToSet = new Dictionary<string, byte[]>(1);
-			itemsToSet.Add(VALUE_PREFIX+name, bytes);
+			itemsToSet.Add(prefix+name, bytes);
 			//itemsToSet.Add(TYPE_PREFIX+name, Encoding.ASCII.GetBytes(value.GetType().AssemblyQualifiedName));
 			var setTask = redis.Hashes.Set(0, GetKeyForSession(), itemsToSet);
 			SetTasks.Add(setTask);
 
 			OneTimeResetTimeout();
 
-			if (rawItems.ContainsKey(VALUE_PREFIX + name)) {
-				rawItems[VALUE_PREFIX + name] = bytes;
+			if (rawItems.ContainsKey(prefix + name)) {
+				rawItems[prefix + name] = bytes;
 			}
 			else {
-				rawItems.Add(VALUE_PREFIX + name, bytes);
+				rawItems.Add(prefix + name, bytes);
 			}
 
 			if (persistentValues.ContainsKey(name)) {
@@ -269,5 +271,6 @@ namespace AngiesList.Redis
 				throw new NotImplementedException();
 			}
 		}
+
 	}
 }

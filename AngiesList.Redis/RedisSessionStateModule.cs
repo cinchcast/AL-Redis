@@ -85,6 +85,8 @@ namespace AngiesList.Redis
 			bool isNew = false;
 			string sessionId;
 
+            string appName = AppDomain.CurrentDomain.FriendlyName;
+
 			RedisSessionItemHash sessionItemCollection = null;
 			bool supportSessionIDReissue = true;
 
@@ -107,7 +109,7 @@ namespace AngiesList.Redis
 
 			releaseCalled = false;
 
-			sessionItemCollection = new RedisSessionItemHash(sessionId, redisConfig.SessionTimeout, GetRedisConnection());
+			sessionItemCollection = new RedisSessionItemHash(sessionId, appName, redisConfig.SessionTimeout, GetRedisConnection());
 
 			if (sessionItemCollection.Count == 0) {
 				isNew = true;

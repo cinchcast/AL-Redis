@@ -307,8 +307,8 @@ namespace AngiesList.Redis
 			var redis = GetRedisConnection();
 			var getTimeoutMinutes = redis.Hashes.Get(0, GetKeyForSessionId(id), "timeoutMinutes");
 
-			if (getTimeoutMinutes != null) {
-				var timeoutMinutes = BitConverter.ToInt32(getTimeoutMinutes, 0);
+			if (getTimeoutMinutes.Result != null) {
+				var timeoutMinutes = BitConverter.ToInt32(getTimeoutMinutes.Result, 0);
 				redis.Keys.Expire(0, GetKeyForSessionId(id), timeoutMinutes * 60);
 			}
 		}
