@@ -15,7 +15,7 @@ namespace AngiesList.Redis
 	public sealed class RedisSessionItemHash : NameObjectCollectionBase,  ISessionStateItemCollection
 	{
 		private RedisConnection redis;
-		private string sessionId;
+        private string sessionKey;
         private string prefix;
 		private int timeoutMinutes;
 
@@ -30,8 +30,8 @@ namespace AngiesList.Redis
 		public RedisSessionItemHash(string sessionId, string appName, int timeoutMinutes, RedisConnection redisConnection)
 			: base()
 		{
-			this.sessionId = sessionId;
-            this.prefix = VALUE_PREFIX + appName + ":";
+			this.sessionKey = "sess:" + appName + ":" + sessionId;
+            this.prefix = VALUE_PREFIX + ":";
 			this.timeoutMinutes = timeoutMinutes;
 			this.redis = redisConnection;
 			SetTasks = new List<Task>();
@@ -39,7 +39,7 @@ namespace AngiesList.Redis
 
 		private string GetKeyForSession()
 		{
-			return "sess:" + sessionId;
+            return this.sessionKey;
 		}
 
 		private Dictionary<string, byte[]> rawItems;
