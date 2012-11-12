@@ -24,13 +24,21 @@ namespace AngiesList.Redis
 		private IDictionary<string, object> persistentValues = new Dictionary<string, object>();
 		private object deserializeLock = new object();
 
+        private const bool USE_APPNAME_IN_KEY = false;
 		private const string TYPE_PREFIX = "__CLR_TYPE__";
 		private const string VALUE_PREFIX = "val:";
 
 		public RedisSessionItemHash(string sessionId, string appName, int timeoutMinutes, RedisConnection redisConnection)
 			: base()
 		{
-			this.sessionKey = "sess:" + appName + ":" + sessionId;
+            if (USE_APPNAME_IN_KEY)
+            {
+                this.sessionKey = "sess:" + appName + ":" + sessionId;
+            }
+            else
+            {
+                this.sessionKey = "sess:" + sessionId;
+            }
             this.prefix = VALUE_PREFIX + ":";
 			this.timeoutMinutes = timeoutMinutes;
 			this.redis = redisConnection;
