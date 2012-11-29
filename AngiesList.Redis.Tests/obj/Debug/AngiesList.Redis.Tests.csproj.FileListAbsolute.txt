@@ -1,0 +1,1 @@
+\\psf\Home\Projects\AL-Redis\AngiesList.Redis.Tests\obj\Debug\AngiesList.Redis.Tests.csprojResolveAssemblyReference.cache

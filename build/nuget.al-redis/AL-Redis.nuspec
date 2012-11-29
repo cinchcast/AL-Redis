@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>AngiesList.Redis</id>
+    <version>$version$</version>
+    <title>AL-Redis</title>
+    <authors>Nathan Davis, Greg MacLellan, Danny Gershman</authors>
+    <owners>Greg MacLellan</owners>
+    <licenseUrl>https://github.com/cinchcast/AL-Redis/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/cinchcast/AL-Redis</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Simple data access and session storage providers for Redis</description>
+    <copyright>Copyright 2012</copyright>
+    <tags>redis session</tags>
+    <dependencies>
+        <dependency id="BookSleeve" version="1.1.0.5" />
+        <dependency id="ServiceStack.Text" version="3.0.0" />
+    </dependencies>
+  </metadata>
+</package>

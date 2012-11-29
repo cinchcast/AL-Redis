@@ -1,0 +1,13 @@
+\\psf\Home\Projects\AL-Redis\TestWebSite\bin\TestWebSite.dll
+\\psf\Home\Projects\AL-Redis\TestWebSite\bin\TestWebSite.pdb
+\\psf\Home\Projects\AL-Redis\TestWebSite\bin\AngiesList.Redis.dll
+\\psf\Home\Projects\AL-Redis\TestWebSite\bin\BookSleeve.dll
+\\psf\Home\Projects\AL-Redis\TestWebSite\bin\ServiceStack.Text.dll
+\\psf\Home\Projects\AL-Redis\TestWebSite\bin\AngiesList.Redis.pdb
+\\psf\Home\Projects\AL-Redis\TestWebSite\bin\BookSleeve.pdb
+\\psf\Home\Projects\AL-Redis\TestWebSite\bin\BookSleeve.xml
+\\psf\Home\Projects\AL-Redis\TestWebSite\bin\ServiceStack.Text.pdb
+\\psf\Home\Projects\AL-Redis\TestWebSite\bin\ServiceStack.Text.xml
+\\psf\Home\Projects\AL-Redis\TestWebSite\obj\Debug\TestWebSite.csprojResolveAssemblyReference.cache
+\\psf\Home\Projects\AL-Redis\TestWebSite\obj\Debug\TestWebSite.dll
+\\psf\Home\Projects\AL-Redis\TestWebSite\obj\Debug\TestWebSite.pdb

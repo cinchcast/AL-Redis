@@ -1,0 +1,11 @@
+\\psf\Home\Projects\AL-Redis\AngiesList.Redis\bin\Debug\AngiesList.Redis.dll
+\\psf\Home\Projects\AL-Redis\AngiesList.Redis\bin\Debug\AngiesList.Redis.pdb
+\\psf\Home\Projects\AL-Redis\AngiesList.Redis\bin\Debug\BookSleeve.dll
+\\psf\Home\Projects\AL-Redis\AngiesList.Redis\bin\Debug\ServiceStack.Text.dll
+\\psf\Home\Projects\AL-Redis\AngiesList.Redis\bin\Debug\BookSleeve.pdb
+\\psf\Home\Projects\AL-Redis\AngiesList.Redis\bin\Debug\BookSleeve.xml
+\\psf\Home\Projects\AL-Redis\AngiesList.Redis\bin\Debug\ServiceStack.Text.pdb
+\\psf\Home\Projects\AL-Redis\AngiesList.Redis\bin\Debug\ServiceStack.Text.xml
+\\psf\Home\Projects\AL-Redis\AngiesList.Redis\obj\Debug\AngiesList.Redis.csprojResolveAssemblyReference.cache
+\\psf\Home\Projects\AL-Redis\AngiesList.Redis\obj\Debug\AngiesList.Redis.dll
+\\psf\Home\Projects\AL-Redis\AngiesList.Redis\obj\Debug\AngiesList.Redis.pdb
