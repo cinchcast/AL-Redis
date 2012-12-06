@@ -9,3 +9,5 @@
 \\psf\Home\Projects\AL-Redis\AngiesList.Redis\obj\Debug\AngiesList.Redis.csprojResolveAssemblyReference.cache
 \\psf\Home\Projects\AL-Redis\AngiesList.Redis\obj\Debug\AngiesList.Redis.dll
 \\psf\Home\Projects\AL-Redis\AngiesList.Redis\obj\Debug\AngiesList.Redis.pdb
+\\psf\Home\Projects\AL-Redis\AngiesList.Redis\bin\Debug\Cinchcast.Framework.Redis.dll
+\\psf\Home\Projects\AL-Redis\AngiesList.Redis\bin\Debug\Cinchcast.Framework.Redis.xml

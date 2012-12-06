@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Web.SessionState;
@@ -27,17 +28,18 @@ namespace AngiesList.Redis
         private const bool USE_APPNAME_IN_KEY = false;
 		private const string TYPE_PREFIX = "__CLR_TYPE__";
 		private const string VALUE_PREFIX = "val:";
+	    private string REDIS_NAMESPACE = ConfigurationManager.AppSettings["RedisNamespace"];
 
 		public RedisSessionItemHash(string sessionId, string appName, int timeoutMinutes, RedisConnection redisConnection)
 			: base()
 		{
             if (USE_APPNAME_IN_KEY)
             {
-                this.sessionKey = "sess:" + appName + ":" + sessionId;
+                this.sessionKey = REDIS_NAMESPACE + ":" + appName + ":" + sessionId;
             }
             else
             {
-                this.sessionKey = "sess:" + sessionId;
+                this.sessionKey = REDIS_NAMESPACE + ":" + sessionId;
             }
             this.prefix = VALUE_PREFIX + ":";
 			this.timeoutMinutes = timeoutMinutes;

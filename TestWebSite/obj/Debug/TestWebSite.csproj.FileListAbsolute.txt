@@ -11,3 +11,5 @@
 \\psf\Home\Projects\AL-Redis\TestWebSite\obj\Debug\TestWebSite.csprojResolveAssemblyReference.cache
 \\psf\Home\Projects\AL-Redis\TestWebSite\obj\Debug\TestWebSite.dll
 \\psf\Home\Projects\AL-Redis\TestWebSite\obj\Debug\TestWebSite.pdb
+\\psf\Home\Projects\AL-Redis\TestWebSite\bin\Cinchcast.Framework.Redis.dll
+\\psf\Home\Projects\AL-Redis\TestWebSite\bin\Cinchcast.Framework.Redis.xml

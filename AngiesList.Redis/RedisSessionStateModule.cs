@@ -7,6 +7,7 @@ using System.Threading;
 using System.Configuration;
 using BookSleeve;
 using System.Threading.Tasks;
+using Cinchcast.Framework.Redis;
 
 namespace AngiesList.Redis
 {
@@ -48,7 +49,7 @@ namespace AngiesList.Redis
 
 		private RedisConnection GetRedisConnection()
 		{
-			if (redisConnection.NeedsReset()) {
+			/*if (redisConnection.NeedsReset()) {
 				lock (typeof(RedisSessionStateModule)) {
 					if (redisConnection.NeedsReset()) {
 
@@ -60,7 +61,13 @@ namespace AngiesList.Redis
 					}
 				}
 			}
-			return redisConnection;
+			return redisConnection;*/
+		    lock (typeof (RedisSessionStateModule))
+		    {
+		        RedisConnectionGateway.RetryTimeout = int.Parse(ConfigurationManager.AppSettings["RedisRetryTimeout"]);
+		        RedisConnectionGateway.RedisConnectionSettings = new RedisConnectionSetting(redisConfig.Host, redisConfig.Port);
+		        return RedisConnectionGateway.Current.GetConnection();
+		    }
 		}
 
 

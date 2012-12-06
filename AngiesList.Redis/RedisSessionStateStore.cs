@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Configuration;
 using BookSleeve;
 using System.IO;
+using Cinchcast.Framework.Redis;
 
 namespace AngiesList.Redis
 {
@@ -34,7 +35,7 @@ namespace AngiesList.Redis
 
 		private RedisConnection GetRedisConnection()
 		{
-			if (redisConnection == null ||
+			/*if (redisConnection == null ||
 				 (redisConnection.State != RedisConnectionBase.ConnectionState.Open &&
 				  redisConnection.State != RedisConnectionBase.ConnectionState.Opening)) {
 				lock (locker) {
@@ -49,7 +50,13 @@ namespace AngiesList.Redis
 					}
 				}
 			}
-			return redisConnection;
+			return redisConnection;*/
+		    lock (locker)
+		    {
+		        RedisConnectionGateway.RetryTimeout = int.Parse(WebConfigurationManager.AppSettings["RedisRetryTimeout"]);
+		        RedisConnectionGateway.RedisConnectionSettings = new RedisConnectionSetting(redisConfig.Host, redisConfig.Port);
+		        return RedisConnectionGateway.Current.GetConnection();
+		    }
 		}
 
 		private string GetKeyForSessionId(string id)

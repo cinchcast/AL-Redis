@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using BookSleeve;
+using Cinchcast.Framework.Redis;
 
 namespace AngiesList.Redis
 {
@@ -28,7 +30,7 @@ namespace AngiesList.Redis
         private object _getConnectionLock = new object();
         private RedisConnection GetConnection()
         {
-			  if (connection.NeedsReset()) {
+			/*if (connection.NeedsReset()) {
                   lock (_getConnectionLock)
                 {
                     if (connection.NeedsReset())
@@ -41,8 +43,14 @@ namespace AngiesList.Redis
                         };
                     }
                 }
-            }
-            return connection;
+            }            
+            return connection;*/
+            lock (_getConnectionLock)
+            {
+                RedisConnectionGateway.RetryTimeout = int.Parse(ConfigurationManager.AppSettings["RedisRetryTimeout"]);
+                RedisConnectionGateway.RedisConnectionSettings = new RedisConnectionSetting(redisConfig.Host, redisConfig.Port);
+                return RedisConnectionGateway.Current.GetConnection();
+            }                        
         }
 
         public override void Set(string key, object value, int? expireSeconds = null)
