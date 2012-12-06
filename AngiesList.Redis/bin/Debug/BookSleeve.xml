@@ -4,6 +4,143 @@
         <name>BookSleeve</name>
     </assembly>
     <members>
+        <member name="T:BookSleeve.ClientInfo">
+            <summary>
+            Represents the state of an individual client connection to redis
+            </summary>
+        </member>
+        <member name="M:BookSleeve.ClientInfo.ToString">
+            <summary>
+            Format the object as a string
+            </summary>
+        </member>
+        <member name="P:BookSleeve.ClientInfo.Address">
+            <summary>
+            address/port of the client
+            </summary>
+        </member>
+        <member name="P:BookSleeve.ClientInfo.AgeSeconds">
+            <summary>
+            total duration of the connection in seconds
+            </summary>
+        </member>
+        <member name="P:BookSleeve.ClientInfo.IdleSeconds">
+            <summary>
+            idle time of the connection in seconds
+            </summary>
+        </member>
+        <member name="P:BookSleeve.ClientInfo.Database">
+            <summary>
+            current database ID
+            </summary>
+        </member>
+        <member name="P:BookSleeve.ClientInfo.SubscriptionCount">
+            <summary>
+            number of channel subscriptions
+            </summary>
+        </member>
+        <member name="P:BookSleeve.ClientInfo.PatternSubscriptionCount">
+            <summary>
+            number of pattern matching subscriptions
+            </summary>
+        </member>
+        <member name="P:BookSleeve.ClientInfo.TransactionCommandLength">
+            <summary>
+            number of commands in a MULTI/EXEC context
+            </summary>
+        </member>
+        <member name="P:BookSleeve.ClientInfo.FlagsRaw">
+            <summary>
+            The client flags can be a combination of:
+            O: the client is a slave in MONITOR mode
+            S: the client is a normal slave server
+            M: the client is a master
+            x: the client is in a MULTI/EXEC context
+            b: the client is waiting in a blocking operation
+            i: the client is waiting for a VM I/O (deprecated)
+            d: a watched keys has been modified - EXEC will fail
+            c: connection to be closed after writing entire reply
+            u: the client is unblocked
+            A: connection to be closed ASAP
+            N: no specific flag set
+            </summary>
+        </member>
+        <member name="P:BookSleeve.ClientInfo.Flags">
+            <summary>
+            The flags associated with this connection
+            </summary>
+        </member>
+        <member name="P:BookSleeve.ClientInfo.LastCommand">
+            <summary>
+             last command played
+            </summary>
+        </member>
+        <member name="T:BookSleeve.ClientFlags">
+            <summary>
+            The client flags can be a combination of:
+            O: the client is a slave in MONITOR mode
+            S: the client is a normal slave server
+            M: the client is a master
+            x: the client is in a MULTI/EXEC context
+            b: the client is waiting in a blocking operation
+            i: the client is waiting for a VM I/O (deprecated)
+            d: a watched keys has been modified - EXEC will fail
+            c: connection to be closed after writing entire reply
+            u: the client is unblocked
+            A: connection to be closed ASAP
+            N: no specific flag set
+            </summary>
+        </member>
+        <member name="F:BookSleeve.ClientFlags.None">
+            <summary>
+            no specific flag set
+            </summary>
+        </member>
+        <member name="F:BookSleeve.ClientFlags.SlaveMonitor">
+            <summary>
+            the client is a slave in MONITOR mode
+            </summary>
+        </member>
+        <member name="F:BookSleeve.ClientFlags.Slave">
+            <summary>
+            the client is a normal slave server
+            </summary>
+        </member>
+        <member name="F:BookSleeve.ClientFlags.Master">
+            <summary>
+            the client is a master
+            </summary>
+        </member>
+        <member name="F:BookSleeve.ClientFlags.Transaction">
+            <summary>
+            the client is in a MULTI/EXEC context
+            </summary>
+        </member>
+        <member name="F:BookSleeve.ClientFlags.Blocked">
+            <summary>
+            the client is waiting in a blocking operation
+            </summary>
+        </member>
+        <member name="F:BookSleeve.ClientFlags.TransactionDoomed">
+            <summary>
+            a watched keys has been modified - EXEC will fail
+            </summary>
+        </member>
+        <member name="F:BookSleeve.ClientFlags.Closing">
+            <summary>
+            connection to be closed after writing entire reply
+            </summary>
+        </member>
+        <member name="F:BookSleeve.ClientFlags.Unblocked">
+            <summary>
+            the client is unblocked
+            </summary>
+        </member>
+        <member name="F:BookSleeve.ClientFlags.CloseASAP">
+            <summary>
+            connection to be closed ASAP
+            </summary>
+        </member>
         <member name="T:BookSleeve.Condition">
             <summary>
             Describes a pre-condition used in a redis transaction
@@ -80,7 +217,17 @@
             Inspect the provided configration, and connect to the available servers to report which server is the preferred/active node.
             </summary>
         </member>
+        <member name="M:BookSleeve.ConnectionUtils.SelectConfiguration(System.String,System.String[]@,System.String,System.IO.TextWriter)">
+            <summary>
+            Inspect the provided configration, and connect to the available servers to report which server is the preferred/active node.
+            </summary>
+        </member>
         <member name="M:BookSleeve.ConnectionUtils.Connect(System.String,System.IO.TextWriter)">
+            <summary>
+            Inspect the provided configration, and connect to the preferred/active node after checking what nodes are available.
+            </summary>
+        </member>
+        <member name="M:BookSleeve.ConnectionUtils.Connect(System.String,System.Boolean,System.String,System.IO.TextWriter)">
             <summary>
             Inspect the provided configration, and connect to the preferred/active node after checking what nodes are available.
             </summary>
@@ -91,6 +238,11 @@
             </summary>
         </member>
         <member name="M:BookSleeve.ConnectionUtils.SwitchMaster(System.String,System.String,System.IO.TextWriter)">
+            <summary>
+            Using the configuration available, and after checking which nodes are available, switch the master node and broadcast this change.
+            </summary>
+        </member>
+        <member name="M:BookSleeve.ConnectionUtils.SwitchMaster(System.String,System.String,System.String,System.IO.TextWriter)">
             <summary>
             Using the configuration available, and after checking which nodes are available, switch the master node and broadcast this change.
             </summary>
@@ -106,7 +258,7 @@
             </summary>
             <remarks>http://redis.io/commands#scripting</remarks>
         </member>
-        <member name="M:BookSleeve.IScriptingCommands.Eval(System.Int32,System.String,System.String[],System.Object[],System.Boolean,System.Boolean)">
+        <member name="M:BookSleeve.IScriptingCommands.Eval(System.Int32,System.String,System.String[],System.Object[],System.Boolean,System.Boolean,System.Boolean)">
             <summary>
             Execute a Lua 5.1 script. The script does not need to define a Lua function (and should not). It is just a Lua program that will run in the context of the Redis server.
             All key-names should be passed via the keyArgs parameter, which allows necessary checks by Redis. Note that Lua scripts in Redis have a range of features and
@@ -418,6 +570,18 @@
             Flush the Lua scripts cache; this can damage existing connections that expect the flush to behave normally, and should be used with caution.
             </summary>
             <remarks>http://redis.io/commands/script-flush</remarks>
+        </member>
+        <member name="M:BookSleeve.IServerCommands.ListClients">
+            <summary>
+            The CLIENT LIST command returns information and statistics about the client connections server in a mostly human readable format.
+            </summary>
+            <remarks>http://redis.io/commands/client-list</remarks>
+        </member>
+        <member name="M:BookSleeve.IServerCommands.KillClient(System.String)">
+            <summary>
+            The CLIENT KILL command closes a given client connection identified by ip:port.
+            </summary>
+            <remarks>http://redis.io/commands/client-kill</remarks>
         </member>
         <member name="T:BookSleeve.ISortedSetCommands">
             <summary>
@@ -936,6 +1100,18 @@
             Return the number of keys in the currently selected database.
             </summary>
             <remarks>http://redis.io/commands/dbsize</remarks>
+        </member>
+        <member name="M:BookSleeve.IKeyCommands.SortString(System.Int32,System.String,System.String,System.String[],System.Int64,System.Int64,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Returns or stores the elements contained in the list, set or sorted set at key. By default, sorting is numeric and elements are compared by their value interpreted as double precision floating point number. 
+            </summary>
+            <remarks>http://redis.io/commands/sort</remarks>
+        </member>
+        <member name="M:BookSleeve.IKeyCommands.SortAndStore(System.Int32,System.String,System.String,System.String,System.String[],System.Int64,System.Int64,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Returns or stores the elements contained in the list, set or sorted set at key. By default, sorting is numeric and elements are compared by their value interpreted as double precision floating point number. 
+            </summary>
+            <remarks>http://redis.io/commands/sort</remarks>
         </member>
         <member name="T:BookSleeve.IHashCommands">
             <summary>
@@ -2463,7 +2639,7 @@
         </member>
         <member name="T:BookSleeve.RedisException">
             <summary>
-            An redis-related exception; this could represent a message from the server,
+            A redis-related exception; this could represent a message from the server,
             or a protocol error talking to the server.
             </summary>
         </member>
@@ -2480,6 +2656,31 @@
         <member name="M:BookSleeve.RedisException.#ctor(System.String,System.Exception)">
             <summary>
             Create a new RedisException
+            </summary>
+        </member>
+        <member name="M:BookSleeve.RedisException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Create a new RedisException
+            </summary>
+        </member>
+        <member name="T:BookSleeve.RedisReadonlySlaveException">
+            <summary>
+            A redis-related exception, where an attempt has been made to change a value on a readonly slave (2.6 or above)
+            </summary>
+        </member>
+        <member name="M:BookSleeve.RedisReadonlySlaveException.#ctor">
+            <summary>
+            Create a new RedisReadonlySlaveException 
+            </summary>
+        </member>
+        <member name="M:BookSleeve.RedisReadonlySlaveException.#ctor(System.String)">
+            <summary>
+            Create a new RedisReadonlySlaveException 
+            </summary>
+        </member>
+        <member name="M:BookSleeve.RedisReadonlySlaveException.#ctor(System.String,System.Exception)">
+            <summary>
+            Create a new RedisReadonlySlaveException 
             </summary>
         </member>
         <member name="T:BookSleeve.RedisSubscriberConnection">
