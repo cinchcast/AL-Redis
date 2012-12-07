@@ -1,5 +1,6 @@
 AL-Redis (AngiesList.Redis)
 ---------------------------
+Modifications for Cinchcast included
 
 The AngiesList.Redis library contains a few useful classes:
 
