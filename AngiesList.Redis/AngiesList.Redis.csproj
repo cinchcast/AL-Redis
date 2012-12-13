@@ -50,13 +50,13 @@
     <DocumentationFile>bin\Release\AngiesList.Redis.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BookSleeve, Version=1.2.0.2, Culture=neutral, PublicKeyToken=9056fda458ff61cf, processorArchitecture=MSIL">
+    <Reference Include="BookSleeve, Version=1.2.0.5, Culture=neutral, PublicKeyToken=9056fda458ff61cf, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\BookSleeve.1.2.0.2\lib\BookSleeve.dll</HintPath>
+      <HintPath>..\packages\BookSleeve.1.2.0.5\lib\BookSleeve.dll</HintPath>
     </Reference>
-    <Reference Include="Cinchcast.Framework.Redis, Version=1.1.0.12022, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cinchcast.Framework.Redis, Version=1.1.0.12125, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Cinchcast.Framework.Redis.1.1.0.12022\lib\net40\Cinchcast.Framework.Redis.dll</HintPath>
+      <HintPath>..\packages\Cinchcast.Framework.Redis.1.1.0.12125\lib\net40\Cinchcast.Framework.Redis.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Text">
       <HintPath>..\packages\ServiceStack.Text.3.0.6\lib\net35\ServiceStack.Text.dll</HintPath>

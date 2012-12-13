@@ -482,6 +482,11 @@
             the connection
             </summary>
         </member>
+        <member name="P:BookSleeve.RedisConnectionBase.ServerType">
+            <summary>
+            What type of connection is this
+            </summary>
+        </member>
         <member name="T:BookSleeve.RedisConnectionBase.ConnectionState">
             <summary>
             Indicates the current state of the connection to the server
@@ -768,16 +773,16 @@
         </member>
         <member name="M:BookSleeve.ISortedSetCommands.IntersectAndStore(System.Int32,System.String,System.String[],BookSleeve.RedisAggregate,System.Boolean)">
             <summary>
-            Intersects the sorted sets at setsToIntersect to a new sortedset at resultSetKey
+            Computes the intersection of numkeys sorted sets given by the specified keys, and stores the result in destination.
             </summary>
-            <remarks>If destination already exists, it is overwritten.</remarks>
+            <remarks>http://redis.io/commands/zinterstore</remarks>
             <returns>the number of elements in the resulting set.</returns>
         </member>
         <member name="M:BookSleeve.ISortedSetCommands.UnionAndStore(System.Int32,System.String,System.String[],BookSleeve.RedisAggregate,System.Boolean)">
             <summary>
-            Intersects the sorted sets at setsToIntersect to a new sortedset at resultSetKey
+            Computes the union of numkeys sorted sets given by the specified keys, and stores the result in destination. It is mandatory to provide the number of input keys (numkeys) before passing the input keys and the other (optional) arguments.
             </summary>
-            <remarks>If destination already exists, it is overwritten.</remarks>
+            <remarks>http://redis.io/commands/zunionstore</remarks>
             <returns>the number of elements in the resulting set.</returns>
         </member>
         <member name="T:BookSleeve.ISetCommands">
@@ -2454,6 +2459,32 @@
         <member name="F:BookSleeve.RedisAggregate.Max">
             <summary>
             The resulting set will contain the maximum score of an element across the inputs where it exists
+            </summary>
+        </member>
+        <member name="T:BookSleeve.ServerType">
+            <summary>
+            What type of server does this represent
+            </summary>
+        </member>
+        <member name="F:BookSleeve.ServerType.Unknown">
+            <summary>
+            The server is not yet connected, or is not recognised
+            </summary>
+        </member>
+        <member name="F:BookSleeve.ServerType.Master">
+            <summary>
+            The server is a master node, suitable for read and write
+            </summary>
+        </member>
+        <member name="F:BookSleeve.ServerType.Slave">
+            <summary>
+            The server is a replication slave, suitable for read
+            </summary>
+        </member>
+        <member name="F:BookSleeve.ServerType.Sentinel">
+            <summary>
+            The server is a sentinel, used for anutomated configuration
+            and failover
             </summary>
         </member>
         <member name="T:BookSleeve.Counters">

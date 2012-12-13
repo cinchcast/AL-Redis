@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>Cinchcast.Framework.Redis</id>
-    <version>1.1.0.12022</version>
+    <version>1.1.0.12125</version>
     <title>Cinchcast.Framework.Redis</title>
     <authors>Cinchcast Inc.</authors>
     <owners>Cinchcast Inc.</owners>
