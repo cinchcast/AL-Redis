@@ -17,7 +17,8 @@
         </member>
         <member name="T:Cinchcast.Framework.Redis.RedisConnectionGateway">
             <summary>
-            This manages a Redis connection pool that handles failover scenarios.  It's a singleton that can wait N times for N milliseconds to retry
+            This manages a Redis connection pool that handles failover scenarios.  It's a singleton that can wait N times for N milliseconds to retry.  
+            You can mention in the configuration file RedisConnectionLogGateway for a log file of retries.
             </summary>
         </member>
         <member name="F:Cinchcast.Framework.Redis.RedisConnectionGateway.REDIS_CONNECTION_FAILED">
@@ -38,6 +39,11 @@
         <member name="F:Cinchcast.Framework.Redis.RedisConnectionGateway._syncConnectionLock">
             <summary>
             Internal thread synchronization object for the connection
+            </summary>
+        </member>
+        <member name="F:Cinchcast.Framework.Redis.RedisConnectionGateway._logFileLocation">
+            <summary>
+            Internal log file location
             </summary>
         </member>
         <member name="F:Cinchcast.Framework.Redis.RedisConnectionGateway._connection">
